@@ -10,7 +10,7 @@ case class Task( id:Pk[Int], label:String, description:String)
 
 object Task {
 
-  val task = {
+  val parser = {
       get[Pk[Int]]("id") ~
       get[String]("label") ~
       get[String]("description") map {
@@ -19,8 +19,13 @@ object Task {
   }
 
   def all(): List[Task] = DB.withConnection { implicit c =>
-    SQL("select * from task").as(task *)
+    SQL("select * from task").as(parser *)
   }
+
+  def getById(id: Int): Task = DB.withConnection {
+    implicit connection =>
+      SQL("select * from task where id = {id}").on("id" -> id).using(parser).single()
+}
 
   def create(task:Task) {
     DB.withConnection { implicit c =>

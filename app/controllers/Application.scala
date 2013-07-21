@@ -21,6 +21,10 @@ object Application extends Controller {
     Redirect(routes.Application.tasks)
   }
 
+  def task(id: Int) = Action {
+    Ok(views.html.task(Task.getById(id)))
+  }
+
   def tasks = Action {
     Ok(views.html.index(Task.all(), taskForm))
   }

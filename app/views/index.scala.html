@@ -9,8 +9,8 @@
     <ul>
         @tasks.map { task =>
             <li>
-                @task.label:
-                @task.description
+                <a href ="../task/@(task.id.get)">@task.label</a>
+
                 @form(routes.Application.deleteTask(task.id.get)) {
                     <input type="submit" value="Delete">
                 }

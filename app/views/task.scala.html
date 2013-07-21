@@ -1,0 +1,11 @@
+@(task: Task)
+
+@import helper._
+
+@main("Todo Task #" + task.id) {
+
+    <h2>Task #@task.id @task.label</h2>
+
+    <em>Description:</em> @task.description
+
+}
